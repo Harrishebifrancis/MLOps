@@ -2,8 +2,6 @@
 
 Serve a scikit‑learn model as a **FastAPI** service. The project trains a classifier on the classic **Wine** dataset, saves the model with `joblib`, and exposes a single prediction endpoint.
 
-> Works on macOS, Windows, and Linux. Swagger UI available at `/docs`.
-
 ---
 
 ## Features
