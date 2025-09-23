@@ -9,7 +9,6 @@ Serve a scikit‑learn model as a **FastAPI** service. The project trains a clas
 * 🚀 FastAPI app with a **single POST** endpoint: `POST /predict`
 * 🧠 Model: scikit‑learn pipeline (scaler + logistic regression)
 * 💾 Serialized bundle saved to `model/wine_model.pkl`
-* 🛡️ CORS enabled for local development
 * 🧰 Optionally exposes `GET /` for health & metadata (feature names, classes)
 
 ---
@@ -18,37 +17,21 @@ Serve a scikit‑learn model as a **FastAPI** service. The project trains a clas
 
 ```
 FAST_API/
-├── assets/                     # (optional) screenshots, images
+├── assets/                     
 ├── model/
-│   └── wine_model.pkl          # created by training step
+│   └── wine_model.pkl          
 ├── src/
-│   ├── __init__.py             # marks src as a package
-│   ├── data.py                 # Pydantic request/response schemas
-│   ├── main.py                 # FastAPI app + endpoints
-│   ├── predict.py              # (optional) helpers
-│   └── train.py                # training script (no pandas required)
-├── README.md                   # this file
-└── requirements.txt            # dependencies (fastapi[all], scikit‑learn, joblib, numpy, etc.)
+│   ├── __init__.py            
+│   ├── data.py                
+│   ├── main.py                
+│   ├── predict.py             
+│   └── train.py               
+├── README.md                  
+└── requirements.txt           
 ```
 
 ---
 
-## Requirements
-
-* Python **3.9+**
-* `pip`
-
-Install dependencies from `requirements.txt`. If you don’t have one, the minimal set is:
-
-```
-fastapi[all]
-uvicorn
-scikit-learn
-joblib
-numpy
-```
-
----
 
 ## Quickstart
 
@@ -62,13 +45,6 @@ source fastapi_lab1_env/bin/activate
 python -m pip install --upgrade pip
 ```
 
-**Windows (PowerShell)**
-
-```powershell
-py -3 -m venv fastapi_lab1_env
-./fastapi_lab1_env/Scripts/Activate.ps1
-python -m pip install --upgrade pip
-```
 
 ### 2) Install dependencies
 
@@ -183,43 +159,5 @@ curl -X POST "http://127.0.0.1:8000/predict" \
   * Loads the bundle once at startup.
   * Exposes `POST /predict` and `GET /`.
   * Accepts either variant of the `od280…` feature key via an alias map.
-  * CORS middleware is enabled for local development.
 
 ---
-
-## Troubleshooting
-
-* **Attempted relative import with no known parent package**
-  Run Uvicorn from project root: `uvicorn src.main:app --reload` (not from inside `src/`).
-
-* **Swagger shows “Failed to fetch”**
-  CORS or browser quirk. CORS is already enabled. Use `http://127.0.0.1:8000/docs` and try Chrome.
-
-* **Model file not found**
-  Run `python src/train.py` again; ensure `model/wine_model.pkl` exists.
-
-* **Missing modules (e.g., joblib)**
-  Activate your venv and reinstall deps: `pip install -r requirements.txt`.
-
-* **KeyError: 'od280/od315\_of\_diluted\_wines'**
-  Use the underscore key in your JSON: `od280_od315_of_diluted_wines`. The server also maps the slash variant.
-
----
-
-## Contributing
-
-PRs and issues are welcome. Keep the FastAPI style, add tests where applicable, and ensure the app still runs with `uvicorn src.main:app --reload` and the model regenerates via `python src/train.py`.
-
----
-
-## License
-
-MIT (or your choice) — update this section as needed.
-
----
-
-## Acknowledgements
-
-* [FastAPI](https://fastapi.tiangolo.com/)
-* [scikit‑learn](https://scikit-learn.org/)
-* UCI Wine dataset
