@@ -115,8 +115,6 @@ Now open: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
   }
   ```
 
-> The server is robust to the slash‑named feature; either key works:
-> `"od280/od315 of diluted wines"` **or** `"od280_od315_of_diluted_wines"`.
 
 ---
 
@@ -146,18 +144,4 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 
 ---
 
-## How it works (internals)
 
-* **Training** (`src/train.py`):
-
-  * Loads the Wine dataset (arrays only; no pandas required).
-  * Cleans the JSON‑unfriendly feature name (`od280/od315 of diluted wines` → `od280_od315_of_diluted_wines`).
-  * Builds two pipelines (full & minimal) using `StandardScaler` + `LogisticRegression(solver="liblinear", C=0.5, max_iter=2000)`.
-  * Saves the bundle (models + metadata) to `model/wine_model.pkl`.
-* **Serving** (`src/main.py`):
-
-  * Loads the bundle once at startup.
-  * Exposes `POST /predict` and `GET /`.
-  * Accepts either variant of the `od280…` feature key via an alias map.
-
----
