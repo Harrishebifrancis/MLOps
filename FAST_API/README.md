@@ -6,10 +6,10 @@ Serve a scikit‑learn model as a **FastAPI** service. The project trains a clas
 
 ## Features
 
-* 🚀 FastAPI app with a **single POST** endpoint: `POST /predict`
-* 🧠 Model: scikit‑learn pipeline (scaler + logistic regression)
-* 💾 Serialized bundle saved to `model/wine_model.pkl`
-* 🧰 Optionally exposes `GET /` for health & metadata (feature names, classes)
+* FastAPI app with a **single POST** endpoint: `POST /predict`
+* Model: scikit‑learn pipeline (scaler + logistic regression)
+* Serialized bundle saved to `model/wine_model.pkl`
+* Optionally exposes `GET /` for health & metadata (feature names, classes)
 
 ---
 
